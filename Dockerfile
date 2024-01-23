@@ -14,12 +14,9 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-RUN python3 manage.py makemigrations creditapproval
-RUN python3 manage.py migrate
-RUN python3 init_data.py
-RUN python3 manage.py loaddata creditapproval/fixtures/customer.json
-RUN python3 manage.py loaddata creditapproval/fixtures/loan.json
-
 EXPOSE 8000
 
-CMD [ "python3", "manage.py", "runserver", "0.0.0.0:8000"]
+
+CMD [ "sh", "./init.sh" ]
+
+# CMD [ "python3", "manage.py", "runserver", "0.0.0.0:8000"]

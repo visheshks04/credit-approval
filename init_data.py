@@ -16,7 +16,7 @@ for index, row in customer_data.iterrows():
             "last_name": row['Last Name'],
             "age": row['Age'],
             "phone_number": row['Phone Number'],
-            "monthly_income": row['Monthly Salary']
+            "monthly_income": int(row['Monthly Salary'])
         }
     })
 
@@ -29,11 +29,11 @@ for index, row in loan_data.iterrows():
         "model": "creditapproval.loan",
         "pk": row['Loan ID'],
         "fields": {
-            "loan_amount": row['Loan Amount'],
-            "tenure": row['Tenure'],
-            "interest_rate": row['Interest Rate'],
+            "loan_amount": int(row['Loan Amount']),
+            "tenure": int(row['Tenure']),
+            "interest_rate": float(row['Interest Rate']),
             "customer": row['Customer ID'],
-            "monthly_installment": row['Monthly payment'],
+            "monthly_installment": int(row['Monthly payment']),
             "start_date": str(row['Date of Approval'].date())
         }
     })
