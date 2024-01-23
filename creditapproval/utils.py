@@ -19,7 +19,7 @@ def get_credit_rating(customer_id):
     serializer = LoanSerializer(loans, many=True)
 
     n_loans = len(serializer.data)
-    sum_of_loans = sum([int(loan['loan_amount']) for loan in serializer.data])
+    sum_of_loans = sum([int(float(loan['loan_amount'])) for loan in serializer.data])
     
     if sum_of_loans > customer.monthly_income*36:
         return 0
