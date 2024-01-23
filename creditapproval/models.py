@@ -8,9 +8,6 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     monthly_income = models.IntegerField(blank=True, null=True)
 
-    ## Calculate approved_limit dynamically 36*monthly_salary
-    ## Also current_debt whenever needed can be derived
-
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -26,7 +23,7 @@ class Loan(models.Model):
 
     def save(self, *args, **kwargs):
         if self.monthly_installment is None:
-            self.monthly_installment = self.calculate_monthly_installment()
+            self.monthly_installment = self._calculate_monthly_installment()
         super().save(*args, **kwargs)
    
 
@@ -38,7 +35,6 @@ class Loan(models.Model):
 
             return round(monthly_installment, 2)
 
-        return None
 
     def __str__(self):
         return f"Loan of {self.loan_amount} for {self.customer}"

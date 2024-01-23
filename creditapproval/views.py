@@ -16,8 +16,10 @@ def register(request):
     if serializer.is_valid():
         customer = serializer.save()
 
-        response = {**serializer.data, "approved_limit": 36*customer.monthly_income}
-
+        response = {**serializer.data, "approved_limit": 36*customer.monthly_income, "name": serializer.data['first_name']+' '+serializer.data['last_name']}
+        del response['first_name']
+        del response['last_name']
+        
         return Response(response, status=status.HTTP_201_CREATED) 
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

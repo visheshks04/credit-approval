@@ -1,9 +1,26 @@
+from .models import *
+from .serializers import LoanSerializer
+from django.shortcuts import get_object_or_404
+
 def calculate_monthly_installment(amount, interest_rate, tenure):
-    return 0 ## TODO
+    if amount > 0 and interest_rate > 0 and tenure > 0:
+
+        monthly_interest_rate = (interest_rate / 100) / 12
+        monthly_installment = (amount * interest_rate) / (1 - (1 + interest_rate) ** -tenure)
+
+        return round(monthly_installment, 2)
+    
+    return None
 
 
 def get_credit_rating(customer_id):
-    return 50 ## TODO
+    customer = get_object_or_404(Customer, pk=customer_id)
+    loans = Loan.objects.filter(customer=customer)
+    serializer = LoanSerializer(loans, many=True)
+
+
+    return 0
+
 
 def check_loan_eligibility(customer_id, interest_rate, loan_amount, tenure):
     credit_rating = get_credit_rating(customer_id)
