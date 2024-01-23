@@ -1,7 +1,7 @@
 #### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/visheshks04/UserAuthDemo.git
+git clone https://github.com/visheshks04/credit-approval.git
 ```
 
 #### 2. Navigate to the directory
