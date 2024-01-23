@@ -16,6 +16,9 @@ COPY . .
 
 RUN python3 manage.py makemigrations creditapproval
 RUN python3 manage.py migrate
+RUN python3 init_data.py
+RUN python3 manage.py loaddata creditapproval/fixtures/customer.json
+RUN python3 manage.py loaddata creditapproval/fixtures/loan.json
 
 EXPOSE 8000
 

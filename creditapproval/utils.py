@@ -18,6 +18,21 @@ def get_credit_rating(customer_id):
     loans = Loan.objects.filter(customer=customer)
     serializer = LoanSerializer(loans, many=True)
 
+    n_loans = len(serializer.data)
+    sum_of_loans = sum([loan['loan_amount'] for loan in serializer.data])
+    
+    if sum_of_loans > customer.monthly_income*36:
+        return 0
+    elif sum_of_loans > customer.monthly_income*27:
+        return 25
+    elif sum_of_loans > customer.monthly_income*18:
+        return 50
+    elif sum_of_loans > customer.monthly_income*9 and n_loans < 3:
+        return 90
+    else:
+        return 75
+    
+    ## Wrote a dummy logic for credit rating for now
 
     return 0
 

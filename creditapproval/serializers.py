@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Customer, Loan
+from .models import *
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:

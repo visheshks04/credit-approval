@@ -88,9 +88,12 @@ def create_loan(request):
 
 @api_view(['GET']) 
 def view_loan(request, loan_id):
-    loan_instance = get_object_or_404(Loan, pk=loan_id)
-    serializer = LoanSerializer(loan_instance)
-    return Response(serializer.data, status=200)
+    try:
+        loan_instance = get_object_or_404(Loan, pk=loan_id)
+        serializer = LoanSerializer(loan_instance)
+        return Response(serializer.data, status=200)
+    except Exception as  e:
+        return Response({"message": f"Exception occured: {e}"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

@@ -1,5 +1,3 @@
 creditapproval/__pycache__/
 env/
 db.sqlite3
-loan_data.xlsx
-customer_data.xlsx
